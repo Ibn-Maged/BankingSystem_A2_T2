@@ -31,7 +31,7 @@ private:
     string Address;
     string Phone;
 
-    map<string, BankAccount> Accounts;
+//    map<string, BankAccount> Accounts;
 
 public:
     inline Client(string name, string address, string phone);
