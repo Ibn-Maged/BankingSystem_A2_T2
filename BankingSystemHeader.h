@@ -11,6 +11,8 @@
 
 using namespace std;
 
+class BankAccount;
+class Client;
 
 class BankApplication {
 public:
