@@ -12,4 +12,50 @@
 using namespace std;
 
 
+class BankApplication{
+
+public:
+    inline BankApplication();
+    inline bool addClient();
+
+};
+
+
+class Client{
+
+private:
+    string Name;
+
+public:
+    inline Client();
+
+};
+
+
+class BankAccount{
+
+private:
+    string AccountID;
+    double Balance;
+
+public:
+    inline BankAccount();
+    inline virtual int withdraw(double amount);
+    inline virtual int deposit(double amount);
+
+};
+
+
+class SavingBankAccount : protected BankAccount{
+
+private:
+    double MinimumBalance;
+
+public:
+    inline SavingBankAccount();
+    inline virtual int withdraw(double amount);
+    inline virtual int deposit(double amount);
+
+}
+
 // End of the file
