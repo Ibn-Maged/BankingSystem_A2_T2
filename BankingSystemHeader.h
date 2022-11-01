@@ -34,7 +34,7 @@ public:
 
 
 class BankAccount {
-private:
+protected:
     string AccountID;
     double Balance;
 
@@ -48,19 +48,18 @@ public:
 };
 
 
-class SavingBankAccount : protected BankAccount {
+class SavingBankAccount : public BankAccount {
 private:
     double MinimumBalance;
 
 public:
     inline SavingBankAccount();
-
     inline virtual int withdraw(double amount);
 
+    inline virtual void setMinimumBalance();
     inline virtual int deposit(double amount);
 
 };
-
 inline void printDashes();
 
 // End of the file

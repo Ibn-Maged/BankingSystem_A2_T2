@@ -68,9 +68,17 @@ int BankAccount::withdraw(double amount) {
 int BankAccount::deposit(double amount) {
 
 }
-
 SavingBankAccount::SavingBankAccount() {
-
+    cout<<"Minimum Balance:";
+    cin>>MinimumBalance;
+    cout<<"Please enter the starting balance:";
+    cin>>Balance;
+    while (Balance<MinimumBalance){
+        cout<<"saving accounts require a minimum starting balance of"<<MinimumBalance<<endl;
+        cout<<"Please enter valid starting balance:";
+        cin>>Balance;
+    }
+    
 }
 
 int SavingBankAccount::withdraw(double amount) {
