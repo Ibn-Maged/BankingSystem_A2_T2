@@ -57,17 +57,50 @@ Client::Client(string name, string address, string phone) {
 
 }
 
-BankAccount::BankAccount() {
-
+// mohamed 
+// constructors
+BankAccount::BankAccount() 
+{
+    counter++;
+    AccountID = "FCAI-" + to_string(counter);
+    Balance = 0;
+}
+BankAccount::BankAccount(double Balance)
+{
+    counter++;
+    AccountID = "FCAI-" + to_string(counter);
+    this->Balance = Balance;
 }
 
-int BankAccount::withdraw(double amount) {
-
+// withdraw and deposit
+int BankAccount::withdraw(double amount) 
+{
+    if (Balance >= amount)
+    {
+        Balance -= amount;
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int BankAccount::deposit(double amount) 
+{
+    Balance += amount;
+    return 1;
 }
 
-int BankAccount::deposit(double amount) {
-
+// getters and setters
+int BankAccount::getBalance()
+{
+    return Balance;
 }
+void BankAccount::setBalance(double Balance)
+{
+    this->Balance = Balance;
+}
+
 SavingBankAccount::SavingBankAccount() {
     cout<<"Minimum Balance:";
     cin>>MinimumBalance;
