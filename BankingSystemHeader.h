@@ -24,9 +24,11 @@ public:
 class Client {
 private:
     string Name;
+    string Address;
+    string Phone;
 
 public:
-    inline Client();
+    inline Client(string name, string address, string phone);
 
 };
 

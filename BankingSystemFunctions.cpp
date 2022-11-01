@@ -53,7 +53,7 @@ bool BankApplication::addClient() {
 }
 
 // Youssef
-Client::Client() {
+Client::Client(string name, string address, string phone) {
 
 }
 
