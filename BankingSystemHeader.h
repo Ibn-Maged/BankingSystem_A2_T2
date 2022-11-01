@@ -8,10 +8,12 @@
 #endif //BANKINGSYSTEM_A2_T2_BANKINGSYSTEMHEADER_H
 
 #include <iostream>
+#include <map>
 
 using namespace std;
 
 class BankAccount;
+
 class Client;
 
 class BankApplication {
@@ -28,6 +30,8 @@ private:
     string Name;
     string Address;
     string Phone;
+
+    map<string, BankAccount> Accounts;
 
 public:
     inline Client(string name, string address, string phone);
@@ -56,12 +60,14 @@ private:
 
 public:
     inline SavingBankAccount();
+
     inline virtual int withdraw(double amount);
 
-    inline virtual void setMinimumBalance();
     inline virtual int deposit(double amount);
 
+    inline virtual void setMinimumBalance();
 };
+
 inline void printDashes();
 
 // End of the file

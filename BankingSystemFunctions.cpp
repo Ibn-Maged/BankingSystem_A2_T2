@@ -89,6 +89,10 @@ int SavingBankAccount::deposit(double amount) {
 
 }
 
+void SavingBankAccount::setMinimumBalance(){
+
+}
+
 // Youssef
 void printDashes() {
     cout << string(20, '-') << endl;
