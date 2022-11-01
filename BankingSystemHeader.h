@@ -59,4 +59,6 @@ public:
 
 };
 
+inline void printDashes();
+
 // End of the file

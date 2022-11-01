@@ -39,4 +39,9 @@ int SavingBankAccount::deposit(double amount) {
 
 }
 
+// Youssef
+void printDashes() {
+    cout << string(20, '-') << endl;
+}
+
 // End of the file
