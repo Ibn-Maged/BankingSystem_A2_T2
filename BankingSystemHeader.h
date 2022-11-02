@@ -13,6 +13,7 @@
 
 #define Basic "Basic"
 #define Saving "Saving"
+#define MinimumDeposit 100
 
 using namespace std;
 
@@ -94,7 +95,7 @@ public:
 class SavingBankAccount : public BankAccount {
 private:
     double MinimumBalance = 1000;
-    double minimumDeposit = 100;
+
 
 public:
     // to overcome object creation to avoid object slicing
@@ -107,6 +108,7 @@ public:
     inline virtual bool deposit(double amount);
 
     inline virtual void setMinimumBalance();
+
 };
 
 inline void printDashes();
