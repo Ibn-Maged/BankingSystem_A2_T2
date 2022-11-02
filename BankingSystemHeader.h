@@ -54,6 +54,7 @@ public:
     inline virtual int deposit(double amount);
     // getters and setters
     int getBalance();
+    string getID();
     void setBalance(double Balance);
 };
 
