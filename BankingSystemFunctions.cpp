@@ -24,9 +24,36 @@ BankApplication::BankApplication() {
         if (selectedMenuOption == "1") {
             // create new account
 
+string      clientName;
+            cout << "Please Enter Client Name =========> ";
+            cin >> clientName;
+
+            string clientAddress;
+            cout << "Please Enter Client Address =======> ";
+            cin >> clientAddress;
+
+            string clientPhone;
+            cout << "Please Enter Client Phone =======> ";
+            cin >> clientPhone;
+
+            string clientAccountType;
+            cout << "What Type of Account Do You Like? (1) Basic (2) Saving - Type 1 or 2 =========> ";
+            cin >> clientAccountType;
+
+            string clientStartingBalance;
+            cout << "Please Enter the Starting Balance =========> ";
+            cin >> clientStartingBalance;
+
+            BankAccount bankAccount = SavingBankAccount(stod(clientStartingBalance));
+            
+            cout << "An account was created with ID " << bankAccount.getID() << 
+            " and Starting Balance " << bankAccount.getBalance() << " L.E." << endl;
+
 
         } else if (selectedMenuOption == "2") {
             // show all clients and accounts
+
+
 
         } else if (selectedMenuOption == "3") {
             // withdraw
@@ -47,13 +74,17 @@ BankApplication::BankApplication() {
 
 }
 
-// Youssef
-bool BankApplication::addClient() {
+// // Youssef
+// bool BankApplication::addClient() {
 
-}
+// }
 
 // Youssef
 Client::Client(string name, string address, string phone) {
+
+    this->Name = name;
+    this->Address = address;
+    this->Phone = phone;
 
 }
 
@@ -92,7 +123,7 @@ int BankAccount::deposit(double amount)
 }
 
 // getters and setters
-int BankAccount::getBalance()
+double BankAccount::getBalance()
 {
     return Balance;
 }
@@ -111,6 +142,7 @@ SavingBankAccount::SavingBankAccount(double Balance):BankAccount(Balance) {
         cout<<"Please enter valid starting balance:";
         cin>>Balance;
     }
+    this->Balance = Balance;
     
 }
 
