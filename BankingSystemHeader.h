@@ -76,9 +76,9 @@ public:
     inline BankAccount(double Balance);
 
     // withdraw and deposit
-    inline virtual int withdraw(double amount);
+    inline virtual bool withdraw(double amount);
 
-    inline virtual int deposit(double amount);
+    inline virtual bool deposit(double amount);
 
     // getters and setters
     inline double getBalance();
@@ -92,6 +92,7 @@ public:
 class SavingBankAccount : public BankAccount {
 private:
     double MinimumBalance = 1000;
+    double minimumDeposit = 100;
 
 public:
     // to overcome object creation to avoid object slicing
@@ -99,9 +100,9 @@ public:
 
     inline SavingBankAccount(double Balance);
 
-    inline virtual int withdraw(double amount);
+    inline virtual bool withdraw(double amount);
 
-    inline virtual int deposit(double amount);
+    inline virtual bool deposit(double amount);
 
     inline virtual void setMinimumBalance();
 };

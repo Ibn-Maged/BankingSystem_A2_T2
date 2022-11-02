@@ -86,7 +86,7 @@ BankApplication::BankApplication() {
                 cout << "Address : " << CLIENTS["CID-" + to_string(i)].getAddress() << endl;
                 cout << "Phone : " << CLIENTS["CID-" + to_string(i)].getPhone() << endl;
                 cout << "Account ID : " << DATA["CID-" + to_string(i)] << " ("
-                << CLIENTS["CID-" + to_string(i)].getAccountType() << ")" << endl;
+                     << CLIENTS["CID-" + to_string(i)].getAccountType() << ")" << endl;
                 cout << "Balance : " << ACCOUNTS["FCAI-" + to_string(i)].getBalance() << endl;
 
 
@@ -97,8 +97,76 @@ BankApplication::BankApplication() {
         } else if (selectedMenuOption == "3") {
             // withdraw
 
+            string accID;
+            string accType;
+            double accBalance;
+            double withdrawAmount = -1.0;
+
+            cout << "Please Enter Account ID (e.g., FCAI-015) =========>";
+            cin >> accID;
+
+            accType = CLIENTS["CID-" + accID.substr(5)].getAccountType();
+            accBalance = ACCOUNTS[accID].getBalance();
+
+            cout << "Account ID : " << accID << endl;
+            cout << "Account Type : " << accType << endl;
+            cout << "Balance : " << accBalance << endl;
+
+            // to prevent object slicing
+            SavingBankAccount savingBankAccount;
+            BankAccount *bankAccount = &savingBankAccount;
+
+            bankAccount = &ACCOUNTS[accID];
+
+            cout << "Please Enter The Amount to Withdraw =========>";
+            cin >> withdrawAmount;
+            bankAccount->withdraw(withdrawAmount);
+
+            ACCOUNTS[accID] = (*bankAccount);
+
+            cout << "Account ID : " << accID << endl;
+            cout << "New Balance : " << ACCOUNTS[accID].getBalance() << endl;
+
+
+            printDashes();
+            cout << endl;
+
         } else if (selectedMenuOption == "4") {
             // deposit
+
+            string accID;
+            string accType;
+            double accBalance;
+            double depositAmount = -1.0;
+
+            cout << "Please Enter Account ID (e.g., FCAI-015) =========>";
+            cin >> accID;
+
+            accType = CLIENTS["CID-" + accID.substr(5)].getAccountType();
+            accBalance = ACCOUNTS[accID].getBalance();
+
+            cout << "Account ID : " << accID << endl;
+            cout << "Account Type : " << accType << endl;
+            cout << "Balance : " << accBalance << endl;
+
+            // to prevent object slicing
+            SavingBankAccount savingBankAccount;
+            BankAccount *bankAccount = &savingBankAccount;
+
+            bankAccount = &ACCOUNTS[accID];
+
+            cout << "Please Enter The Amount to Withdraw =========>";
+            cin >> depositAmount;
+            bankAccount->deposit(depositAmount);
+
+            ACCOUNTS[accID] = (*bankAccount);
+
+            cout << "Account ID : " << accID << endl;
+            cout << "New Balance : " << ACCOUNTS[accID].getBalance() << endl;
+
+
+            printDashes();
+            cout << endl;
 
         } else if (selectedMenuOption == "5") {
             // exit
@@ -147,7 +215,7 @@ string Client::getPhone() {
     return Phone;
 }
 
-string Client::getAccountType(){
+string Client::getAccountType() {
     return AccountType;
 }
 
@@ -166,16 +234,17 @@ BankAccount::BankAccount(double Balance) {
 }
 
 // withdraw and deposit
-int BankAccount::withdraw(double amount) {
+bool BankAccount::withdraw(double amount) {
     if (Balance >= amount) {
         Balance -= amount;
+        cout << "Thank you." << endl;
         return 1;
     } else {
         return 0;
     }
 }
 
-int BankAccount::deposit(double amount) {
+bool BankAccount::deposit(double amount) {
     Balance += amount;
     return 1;
 }
@@ -203,17 +272,18 @@ SavingBankAccount::SavingBankAccount(double Balance) : BankAccount(Balance) {
 
 }
 
-int SavingBankAccount::withdraw(double amount) {
+bool SavingBankAccount::withdraw(double amount) {
     if ((amount - Balance) < MinimumBalance) {
         return 0;
     } else {
         Balance -= amount;
+        cout << "Thank you." << endl;
         return 1;
     }
 
 }
 
-int SavingBankAccount::deposit(double amount) {
+bool SavingBankAccount::deposit(double amount) {
     if (amount >= 100) {
         Balance += amount;
         return 1;
@@ -233,15 +303,15 @@ void printDashes() {
 
 void initializeSomeData() {
 
-//    DATA["CID-1"] = "FCAI-1";
+    DATA["CID-1"] = "FCAI-1";
 //    DATA["CID-2"] = "FCAI-2";
 //    DATA["CID-3"] = "FCAI-3";
 //
-//    CLIENTS["CID-1"] = Client("Youssef", "Haram", "01011", Basic);
+    CLIENTS["CID-1"] = Client("Youssef", "Haram", "01011", Basic);
 //    CLIENTS["CID-2"] = Client("Hassan", "Dokki", "01112", Saving);
 //    CLIENTS["CID-3"] = Client("Mohamed", "Cairo", "01213", Basic);
 //
-//    ACCOUNTS["FCAI-1"] = BankAccount(50.5);
+    ACCOUNTS["FCAI-1"] = BankAccount(50.5);
 //    ACCOUNTS["FCAI-2"] = BankAccount(1250);
 //    ACCOUNTS["FCAI-3"] = BankAccount(400);
 
