@@ -86,6 +86,8 @@ public:
     inline string getID();
 
     inline void setBalance(double Balance);
+
+    inline virtual void increaseIDCounter();
 };
 
 
@@ -96,7 +98,7 @@ private:
 
 public:
     // to overcome object creation to avoid object slicing
-    inline SavingBankAccount() { counter--; }
+    inline SavingBankAccount() {}
 
     inline SavingBankAccount(double Balance);
 

@@ -53,22 +53,28 @@ BankApplication::BankApplication() {
             SavingBankAccount savingBankAccount;
             BankAccount *bankAccount = &savingBankAccount;
 
+            // create account
             if (clientAccountType == "1") {
 
                 clientAccountType = Basic;
 
                 (*bankAccount) = BankAccount(stod(clientStartingBalance));
 
+                bankAccount->increaseIDCounter();
+
             } else if (clientAccountType == "2") {
 
                 clientAccountType = Saving;
 
-                savingBankAccount = SavingBankAccount(stod(clientStartingBalance));
+                (*bankAccount) = SavingBankAccount(stod(clientStartingBalance));
 
+                bankAccount->increaseIDCounter();
             }
 
+            // create client
             Client client = Client(clientName, clientAddress, clientPhone, clientAccountType);
 
+            // add to dataset
             DATA[client.getClientID()] = (*bankAccount).getID();
             CLIENTS[client.getClientID()] = client;
             ACCOUNTS[(*bankAccount).getID()] = (*bankAccount);
@@ -238,7 +244,6 @@ BankAccount::BankAccount() {
 }
 
 BankAccount::BankAccount(double Balance) {
-    counter++;
     AccountID = "FCAI-" + to_string(counter);
     this->Balance = Balance;
 }
@@ -270,6 +275,10 @@ string BankAccount::getID() {
 
 void BankAccount::setBalance(double Balance) {
     this->Balance = Balance;
+}
+
+void BankAccount::increaseIDCounter() {
+    counter++;
 }
 
 SavingBankAccount::SavingBankAccount(double Balance) : BankAccount(Balance) {
@@ -314,16 +323,16 @@ void printDashes() {
 void initializeSomeData() {
 
     DATA["CID-1"] = "FCAI-1";
-//    DATA["CID-2"] = "FCAI-2";
-//    DATA["CID-3"] = "FCAI-3";
+    DATA["CID-2"] = "FCAI-2";
+    DATA["CID-3"] = "FCAI-3";
 //
     CLIENTS["CID-1"] = Client("Youssef", "Haram", "01011", Basic);
-//    CLIENTS["CID-2"] = Client("Hassan", "Dokki", "01112", Saving);
-//    CLIENTS["CID-3"] = Client("Mohamed", "Cairo", "01213", Basic);
+    CLIENTS["CID-2"] = Client("Hassan", "Dokki", "01112", Saving);
+    CLIENTS["CID-3"] = Client("Mohamed", "Cairo", "01213", Basic);
 //
     ACCOUNTS["FCAI-1"] = BankAccount(50.5);
-//    ACCOUNTS["FCAI-2"] = BankAccount(1250);
-//    ACCOUNTS["FCAI-3"] = BankAccount(400);
+    ACCOUNTS["FCAI-2"] = BankAccount(1250);
+    ACCOUNTS["FCAI-3"] = BankAccount(400);
 
 }
 
