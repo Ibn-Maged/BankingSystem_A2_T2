@@ -8,6 +8,7 @@
 #endif //BANKINGSYSTEM_A2_T2_BANKINGSYSTEMHEADER_H
 
 #include <iostream>
+#include <map>
 
 using namespace std;
 
@@ -28,16 +29,17 @@ private:
     string Name;
     string Address;
     string Phone;
+    string ClientID;
 
 public:
     inline Client(string name, string address, string phone);
-
+    string getClientID();
 };
 
 
 class BankAccount {
 protected:
-    string AccountID;
+    string AccountID, AccountType = "Basic";
     double Balance;
     inline static int counter = 0;
 
@@ -55,12 +57,12 @@ public:
 };
 
 
-class SavingBankAccount : protected BankAccount {
+class SavingBankAccount : public BankAccount {
 private:
-    double MinimumBalance;
+    double MinimumBalance = 1000;
 
 public:
-    inline SavingBankAccount();
+    inline SavingBankAccount(double Balance);
 
     inline virtual int withdraw(double amount);
 

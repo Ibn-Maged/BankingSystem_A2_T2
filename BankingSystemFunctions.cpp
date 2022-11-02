@@ -7,9 +7,8 @@
 BankApplication::BankApplication() {
 
     bool validMenuOption = false;
-
     string selectedMenuOption;
-
+    
     while (!validMenuOption) {
 
         cout << "Welcome to FCAI Banking Application " << endl <<
@@ -24,6 +23,7 @@ BankApplication::BankApplication() {
 
         if (selectedMenuOption == "1") {
             // create new account
+
 
         } else if (selectedMenuOption == "2") {
             // show all clients and accounts
@@ -105,11 +105,7 @@ void BankAccount::setBalance(double Balance)
     this->Balance = Balance;
 }
 
-SavingBankAccount::SavingBankAccount() {
-    cout<<"Minimum Balance:";
-    cin>>MinimumBalance;
-    cout<<"Please enter the starting balance:";
-    cin>>Balance;
+SavingBankAccount::SavingBankAccount(double Balance):BankAccount(Balance) {
     while (Balance<MinimumBalance){
         cout<<"saving accounts require a minimum starting balance of"<<MinimumBalance<<endl;
         cout<<"Please enter valid starting balance:";
@@ -119,11 +115,24 @@ SavingBankAccount::SavingBankAccount() {
 }
 
 int SavingBankAccount::withdraw(double amount) {
+    if((amount-Balance)<MinimumBalance){
+        return 0;
+    }
+    else{
+        Balance-=amount;
+        return 1;
+    }
 
 }
 
 int SavingBankAccount::deposit(double amount) {
-
+    if(amount>=100){
+        Balance+=amount;
+        return 1;
+    }
+    else{
+        return 0;
+    }
 }
 
 // Youssef
