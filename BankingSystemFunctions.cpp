@@ -172,6 +172,7 @@ BankApplication::BankApplication() {
             // get amount and deposit
             cout << "Please Enter The Amount to Deposit =========>";
             cin >> depositAmount;
+
             if(accType == Saving){
                 if (depositAmount >= MinimumDeposit)
                 bankAccount->deposit(depositAmount);
