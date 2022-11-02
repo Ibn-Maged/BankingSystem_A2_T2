@@ -105,9 +105,11 @@ BankApplication::BankApplication() {
             cout << "Please Enter Account ID (e.g., FCAI-015) =========>";
             cin >> accID;
 
+            // get account data
             accType = CLIENTS["CID-" + accID.substr(5)].getAccountType();
             accBalance = ACCOUNTS[accID].getBalance();
 
+            // print some account data
             cout << "Account ID : " << accID << endl;
             cout << "Account Type : " << accType << endl;
             cout << "Balance : " << accBalance << endl;
@@ -116,17 +118,20 @@ BankApplication::BankApplication() {
             SavingBankAccount savingBankAccount;
             BankAccount *bankAccount = &savingBankAccount;
 
+            // get account data
             bankAccount = &ACCOUNTS[accID];
 
+            // get amount and withdraw
             cout << "Please Enter The Amount to Withdraw =========>";
             cin >> withdrawAmount;
             bankAccount->withdraw(withdrawAmount);
 
+            // get the updated data
             ACCOUNTS[accID] = (*bankAccount);
 
+            // print the updated data
             cout << "Account ID : " << accID << endl;
             cout << "New Balance : " << ACCOUNTS[accID].getBalance() << endl;
-
 
             printDashes();
             cout << endl;
@@ -142,9 +147,11 @@ BankApplication::BankApplication() {
             cout << "Please Enter Account ID (e.g., FCAI-015) =========>";
             cin >> accID;
 
+            // get account data
             accType = CLIENTS["CID-" + accID.substr(5)].getAccountType();
             accBalance = ACCOUNTS[accID].getBalance();
 
+            // print some account data
             cout << "Account ID : " << accID << endl;
             cout << "Account Type : " << accType << endl;
             cout << "Balance : " << accBalance << endl;
@@ -153,17 +160,20 @@ BankApplication::BankApplication() {
             SavingBankAccount savingBankAccount;
             BankAccount *bankAccount = &savingBankAccount;
 
+            // get account data
             bankAccount = &ACCOUNTS[accID];
 
-            cout << "Please Enter The Amount to Withdraw =========>";
+            // get amount and deposit
+            cout << "Please Enter The Amount to Deposit =========>";
             cin >> depositAmount;
             bankAccount->deposit(depositAmount);
 
+            // get the updated data
             ACCOUNTS[accID] = (*bankAccount);
 
+            // print the updated data
             cout << "Account ID : " << accID << endl;
             cout << "New Balance : " << ACCOUNTS[accID].getBalance() << endl;
-
 
             printDashes();
             cout << endl;
