@@ -8,7 +8,7 @@ BankApplication::BankApplication() {
 
     bool validMenuOption = false;
     string selectedMenuOption;
-    
+
     while (!validMenuOption) {
 
         cout << "Welcome to FCAI Banking Application " << endl <<
@@ -24,7 +24,7 @@ BankApplication::BankApplication() {
         if (selectedMenuOption == "1") {
             // create new account
 
-string      clientName;
+            string clientName;
             cout << "Please Enter Client Name =========> ";
             cin >> clientName;
 
@@ -45,9 +45,9 @@ string      clientName;
             cin >> clientStartingBalance;
 
             BankAccount bankAccount = SavingBankAccount(stod(clientStartingBalance));
-            
-            cout << "An account was created with ID " << bankAccount.getID() << 
-            " and Starting Balance " << bankAccount.getBalance() << " L.E." << endl;
+
+            cout << "An account was created with ID " << bankAccount.getID() <<
+                 " and Starting Balance " << bankAccount.getBalance() << " L.E." << endl;
 
 
         } else if (selectedMenuOption == "2") {
@@ -74,10 +74,10 @@ string      clientName;
 
 }
 
-// // Youssef
-// bool BankApplication::addClient() {
+// Youssef
+bool BankApplication::addClient() {
 
-// }
+}
 
 // Youssef
 Client::Client(string name, string address, string phone) {
@@ -90,84 +90,76 @@ Client::Client(string name, string address, string phone) {
 
 // mohamed 
 // constructors
-BankAccount::BankAccount() 
-{
+BankAccount::BankAccount() {
     counter++;
     AccountID = "FCAI-" + to_string(counter);
     Balance = 0;
 }
-BankAccount::BankAccount(double Balance)
-{
+
+BankAccount::BankAccount(double Balance) {
     counter++;
     AccountID = "FCAI-" + to_string(counter);
     this->Balance = Balance;
 }
 
 // withdraw and deposit
-int BankAccount::withdraw(double amount) 
-{
-    if (Balance >= amount)
-    {
+int BankAccount::withdraw(double amount) {
+    if (Balance >= amount) {
         Balance -= amount;
         return 1;
-    }
-    else
-    {
+    } else {
         return 0;
     }
 }
-int BankAccount::deposit(double amount) 
-{
+
+int BankAccount::deposit(double amount) {
     Balance += amount;
     return 1;
 }
 
 // getters and setters
-double BankAccount::getBalance()
-{
+double BankAccount::getBalance() {
     return Balance;
 }
-string BankAccount::getID()
-{
+
+string BankAccount::getID() {
     return AccountID;
 }
-void BankAccount::setBalance(double Balance)
-{
+
+void BankAccount::setBalance(double Balance) {
     this->Balance = Balance;
 }
 
-SavingBankAccount::SavingBankAccount(double Balance):BankAccount(Balance) {
-    while (Balance<MinimumBalance){
-        cout<<"saving accounts require a minimum starting balance of"<<MinimumBalance<<endl;
-        cout<<"Please enter valid starting balance:";
-        cin>>Balance;
+SavingBankAccount::SavingBankAccount(double Balance) : BankAccount(Balance) {
+    while (Balance < MinimumBalance) {
+        cout << "saving accounts require a minimum starting balance of" << MinimumBalance << endl;
+        cout << "Please enter valid starting balance:";
+        cin >> Balance;
     }
     this->Balance = Balance;
-    
+
 }
 
 int SavingBankAccount::withdraw(double amount) {
-    if((amount-Balance)<MinimumBalance){
+    if ((amount - Balance) < MinimumBalance) {
         return 0;
-    }
-    else{
-        Balance-=amount;
+    } else {
+        Balance -= amount;
         return 1;
     }
 
 }
 
 int SavingBankAccount::deposit(double amount) {
-    if(amount>=100){
-        Balance+=amount;
+    if (amount >= 100) {
+        Balance += amount;
         return 1;
-    }
-    else{
+    } else {
         return 0;
     }
 }
 
-void SavingBankAccount::setMinimumBalance(){
+void SavingBankAccount::setMinimumBalance() {
 
 }
 

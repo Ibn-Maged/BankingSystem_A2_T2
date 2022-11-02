@@ -20,7 +20,7 @@ class BankApplication {
 public:
     inline BankApplication();
 
-    // inline bool addClient();
+    inline bool addClient();
 
 };
 
@@ -37,7 +37,9 @@ private:
 
 public:
     inline Client(string name, string address, string phone);
+
     inline string getClientID();
+
     inline string getAccountType();
 };
 
@@ -51,14 +53,20 @@ protected:
 public:
     // constructors
     inline BankAccount();
+
     inline BankAccount(double Balance);
+
     // withdraw and deposit
     inline virtual int withdraw(double amount);
+
     inline virtual int deposit(double amount);
+
     // getters and setters
-    double getBalance();
-    string getID();
-    void setBalance(double Balance);
+    inline double getBalance();
+
+    inline string getID();
+
+    inline void setBalance(double Balance);
 };
 
 
@@ -78,6 +86,6 @@ public:
 
 inline void printDashes();
 
-map<string, BankAccount&> DATA;
+inline map<string, BankAccount &> DATA;
 
 // End of the file
