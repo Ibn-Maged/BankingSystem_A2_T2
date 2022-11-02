@@ -25,22 +25,23 @@ BankApplication::BankApplication() {
             // create new account
 
             string clientName;
+            string clientAddress;
+            string clientPhone;
+            string clientAccountType;
+            string clientStartingBalance;
+
             cout << "Please Enter Client Name =========> ";
             cin >> clientName;
 
-            string clientAddress;
             cout << "Please Enter Client Address =======> ";
             cin >> clientAddress;
 
-            string clientPhone;
             cout << "Please Enter Client Phone =======> ";
             cin >> clientPhone;
 
-            string clientAccountType;
             cout << "What Type of Account Do You Like? (1) Basic (2) Saving - Type 1 or 2 =========> ";
             cin >> clientAccountType;
 
-            string clientStartingBalance;
             cout << "Please Enter the Starting Balance =========> ";
             cin >> clientStartingBalance;
 
@@ -52,7 +53,6 @@ BankApplication::BankApplication() {
 
         } else if (selectedMenuOption == "2") {
             // show all clients and accounts
-
 
 
         } else if (selectedMenuOption == "3") {
