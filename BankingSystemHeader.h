@@ -30,18 +30,19 @@ private:
     string Name;
     string Address;
     string Phone;
+    string ClientID;
 
 //    map<string, BankAccount> Accounts;
 
 public:
     inline Client(string name, string address, string phone);
-
+    string getClientID();
 };
 
 
 class BankAccount {
 protected:
-    string AccountID;
+    string AccountID, AccountType = "Basic";
     double Balance;
     inline static int counter = 0;
 
@@ -59,12 +60,12 @@ public:
 };
 
 
-class SavingBankAccount : protected BankAccount {
+class SavingBankAccount : public BankAccount {
 private:
-    double MinimumBalance;
+    double MinimumBalance = 1000;
 
 public:
-    inline SavingBankAccount();
+    inline SavingBankAccount(double Balance);
 
     inline virtual int withdraw(double amount);
 
