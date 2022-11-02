@@ -9,12 +9,22 @@
 
 #include <iostream>
 #include <map>
+#include <iomanip>
+
+#define Basic "Basic"
+#define Saving "Saving"
 
 using namespace std;
 
 class BankAccount;
 
+class SavingBankAccount;
+
 class Client;
+
+inline map<string, string> DATA;
+inline map<string, Client> CLIENTS;
+inline map<string, BankAccount> ACCOUNTS;
 
 class BankApplication {
 public:
@@ -32,13 +42,22 @@ private:
     string Phone;
     string AccountType;
     string ClientID;
+    inline static int clientCounter = 0;
 
 //    map<string, BankAccount> Accounts;
 
 public:
-    inline Client(string name, string address, string phone);
+    inline Client() {};
+
+    inline Client(string name, string address, string phone, string accountType);
 
     inline string getClientID();
+
+    inline string getName();
+
+    inline string getAddress();
+
+    inline string getPhone();
 
     inline string getAccountType();
 };
@@ -75,6 +94,9 @@ private:
     double MinimumBalance = 1000;
 
 public:
+    // to overcome object creation to avoid object slicing
+    inline SavingBankAccount() { counter--; }
+
     inline SavingBankAccount(double Balance);
 
     inline virtual int withdraw(double amount);
@@ -86,6 +108,6 @@ public:
 
 inline void printDashes();
 
-inline map<string, BankAccount &> DATA;
+inline void initializeSomeData();
 
 // End of the file

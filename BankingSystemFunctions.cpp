@@ -6,10 +6,9 @@
 // Youssef
 BankApplication::BankApplication() {
 
-    bool validMenuOption = false;
     string selectedMenuOption;
 
-    while (!validMenuOption) {
+    while (true) {
 
         cout << "Welcome to FCAI Banking Application " << endl <<
              "1. Create a New Account " << endl <<
@@ -39,21 +38,61 @@ BankApplication::BankApplication() {
             cout << "Please Enter Client Phone =======> ";
             cin >> clientPhone;
 
+//            do {
+//                cout << "What Type of Account Do You Like? (1) Basic (2) Saving - Type 1 or 2 =========> ";
+//                cin >> clientAccountType;
+//            } while (clientAccountType != "1" || clientAccountType != "2");
+
             cout << "What Type of Account Do You Like? (1) Basic (2) Saving - Type 1 or 2 =========> ";
             cin >> clientAccountType;
 
             cout << "Please Enter the Starting Balance =========> ";
             cin >> clientStartingBalance;
 
-            BankAccount bankAccount = SavingBankAccount(stod(clientStartingBalance));
+            // to prevent object slicing
+            SavingBankAccount savingBankAccount;
+            BankAccount *bankAccount = &savingBankAccount;
 
-            cout << "An account was created with ID " << bankAccount.getID() <<
-                 " and Starting Balance " << bankAccount.getBalance() << " L.E." << endl;
+            if (clientAccountType == "1") {
+
+                clientAccountType = Basic;
+
+                (*bankAccount) = BankAccount(stod(clientStartingBalance));
+
+            } else if (clientAccountType == "2") {
+
+                clientAccountType = Saving;
+
+                savingBankAccount = SavingBankAccount(stod(clientStartingBalance));
+
+            }
+
+            Client client = Client(clientName, clientAddress, clientPhone, clientAccountType);
+
+            DATA[client.getClientID()] = (*bankAccount).getID();
+            CLIENTS[client.getClientID()] = client;
+            ACCOUNTS[(*bankAccount).getID()] = (*bankAccount);
+
+            cout << "An account was created with ID " << (*bankAccount).getID() <<
+                 " and Starting Balance " << (*bankAccount).getBalance() << " L.E." << endl;
 
 
         } else if (selectedMenuOption == "2") {
             // show all clients and accounts
 
+            for (int i = 1; i <= DATA.size(); ++i) {
+
+                cout << setw(20) << setfill('-') << CLIENTS["CID-" + to_string(i)].getName() << endl;
+                cout << "Address : " << CLIENTS["CID-" + to_string(i)].getAddress() << endl;
+                cout << "Phone : " << CLIENTS["CID-" + to_string(i)].getPhone() << endl;
+                cout << "Account ID : " << DATA["CID-" + to_string(i)] << " ("
+                << CLIENTS["CID-" + to_string(i)].getAccountType() << ")" << endl;
+                cout << "Balance : " << ACCOUNTS["FCAI-" + to_string(i)].getBalance() << endl;
+
+
+            }
+            printDashes();
+            cout << endl;
 
         } else if (selectedMenuOption == "3") {
             // withdraw
@@ -80,12 +119,36 @@ bool BankApplication::addClient() {
 }
 
 // Youssef
-Client::Client(string name, string address, string phone) {
+Client::Client(string name, string address, string phone, string accountType) {
 
     this->Name = name;
     this->Address = address;
     this->Phone = phone;
+    this->AccountType = accountType;
 
+    clientCounter++;
+    ClientID = "CID-" + to_string(clientCounter);
+
+}
+
+string Client::getClientID() {
+    return ClientID;
+}
+
+string Client::getName() {
+    return Name;
+}
+
+string Client::getAddress() {
+    return Address;
+}
+
+string Client::getPhone() {
+    return Phone;
+}
+
+string Client::getAccountType(){
+    return AccountType;
 }
 
 // mohamed 
@@ -166,6 +229,22 @@ void SavingBankAccount::setMinimumBalance() {
 // Youssef
 void printDashes() {
     cout << string(20, '-') << endl;
+}
+
+void initializeSomeData() {
+
+//    DATA["CID-1"] = "FCAI-1";
+//    DATA["CID-2"] = "FCAI-2";
+//    DATA["CID-3"] = "FCAI-3";
+//
+//    CLIENTS["CID-1"] = Client("Youssef", "Haram", "01011", Basic);
+//    CLIENTS["CID-2"] = Client("Hassan", "Dokki", "01112", Saving);
+//    CLIENTS["CID-3"] = Client("Mohamed", "Cairo", "01213", Basic);
+//
+//    ACCOUNTS["FCAI-1"] = BankAccount(50.5);
+//    ACCOUNTS["FCAI-2"] = BankAccount(1250);
+//    ACCOUNTS["FCAI-3"] = BankAccount(400);
+
 }
 
 // End of the file

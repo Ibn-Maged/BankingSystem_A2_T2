@@ -4,7 +4,8 @@ int main() {
 
 //    printDashes();
 
-   BankApplication bankApplication = BankApplication();
+    initializeSomeData();
+    BankApplication bankApplication = BankApplication();
 
 
     return 0;
