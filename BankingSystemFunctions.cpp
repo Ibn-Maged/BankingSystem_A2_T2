@@ -96,6 +96,10 @@ int BankAccount::getBalance()
 {
     return Balance;
 }
+string BankAccount::getID()
+{
+    return AccountID;
+}
 void BankAccount::setBalance(double Balance)
 {
     this->Balance = Balance;
