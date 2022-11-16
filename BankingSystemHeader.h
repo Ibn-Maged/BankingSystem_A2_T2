@@ -88,6 +88,8 @@ public:
 
     inline void setBalance(double Balance);
 
+    inline void setCounter(int counterValue);
+
     inline virtual void increaseIDCounter();
 };
 

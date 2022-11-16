@@ -53,6 +53,8 @@ BankApplication::BankApplication() {
             SavingBankAccount savingBankAccount;
             BankAccount *bankAccount = &savingBankAccount;
 
+            bankAccount->setCounter(DATA.size() + 1);
+
             // create account
             if (clientAccountType == "1") {
 
@@ -60,7 +62,7 @@ BankApplication::BankApplication() {
 
                 (*bankAccount) = BankAccount(stod(clientStartingBalance));
 
-                bankAccount->increaseIDCounter();
+//                bankAccount->increaseIDCounter();
 
             } else if (clientAccountType == "2") {
 
@@ -68,8 +70,12 @@ BankApplication::BankApplication() {
 
                 (*bankAccount) = SavingBankAccount(stod(clientStartingBalance));
 
-                bankAccount->increaseIDCounter();
+//                bankAccount->increaseIDCounter();
+            } else {
+                exit(0);
             }
+
+            bankAccount->increaseIDCounter();
 
             // create client
             Client client = Client(clientName, clientAddress, clientPhone, clientAccountType);
@@ -206,7 +212,7 @@ BankApplication::BankApplication() {
 
 // Youssef
 bool BankApplication::addClient() {
-
+    return false;
 }
 
 // Youssef
@@ -245,7 +251,6 @@ string Client::getAccountType() {
 // mohamed 
 // constructors
 BankAccount::BankAccount() {
-    counter++;
     AccountID = "FCAI-" + to_string(counter);
     Balance = 0;
 }
@@ -286,6 +291,10 @@ void BankAccount::setBalance(double Balance) {
 
 void BankAccount::increaseIDCounter() {
     counter++;
+}
+
+void BankAccount::setCounter(int counterValue){
+    counter = counterValue;
 }
 
 SavingBankAccount::SavingBankAccount(double Balance) : BankAccount(Balance) {
